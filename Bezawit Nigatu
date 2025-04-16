@@ -1,0 +1,150 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "3385bda4",
+   "metadata": {},
+   "source": [
+    "# 馃摌 Student Sorting Algorithms in Python\n",
+    "\n",
+    "**Name**: Bezawit Negatu  \n",
+    "**Student ID**: DBU1601999  \n",
+    "**Department**: Data Science  \n",
+    "**GitHub**: [https://github.com/BezawitNigatu](https://github.com/BezawitNigatu)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "bf7cda7e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 鉁� Student Profile Data\n",
+    "\n",
+    "Students = [\n",
+    "    {'id': 'DBU1500001', 'name': 'Dawit', 'dept': 'DS', 'cgpa': 3.34},\n",
+    "    {'id': 'DBU1500002', 'name': 'Abrham', 'dept': 'CS', 'cgpa': 3.12},\n",
+    "    {'id': 'DBU1500003', 'name': 'Soliana', 'dept': 'DS', 'cgpa': 2.74},\n",
+    "    {'id': 'DBU1500004', 'name': 'Rahel', 'dept': 'CS', 'cgpa': 3.10},\n",
+    "    {'id': 'DBU1500005', 'name': 'Mekdes', 'dept': 'DS', 'cgpa': 3.65},\n",
+    "    {'id': 'DBU1500006', 'name': 'Yonatan', 'dept': 'CS', 'cgpa': 2.98},\n",
+    "    {'id': 'DBU1500007', 'name': 'Hana', 'dept': 'DS', 'cgpa': 3.90},\n",
+    "    {'id': 'DBU1500008', 'name': 'Biniam', 'dept': 'CS', 'cgpa': 3.01},\n",
+    "    {'id': 'DBU1500009', 'name': 'Saron', 'dept': 'DS', 'cgpa': 3.47},\n",
+    "    {'id': 'DBU1500010', 'name': 'Nati', 'dept': 'CS', 'cgpa': 2.50}\n",
+    "]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "75d4a116",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 馃敘 Bubble Sort by ID\n",
+    "\n",
+    "def bubble_sort_by_id(data):\n",
+    "    students = data.copy()\n",
+    "    n = len(students)\n",
+    "    for i in range(n):\n",
+    "        for j in range(0, n-i-1):\n",
+    "            if students[j]['id'] > students[j+1]['id']:\n",
+    "                students[j], students[j+1] = students[j+1], students[j]\n",
+    "    return students\n",
+    "\n",
+    "sorted_by_id = bubble_sort_by_id(Students)\n",
+    "print(\"馃敺 Sorted by ID (Bubble Sort):\")\n",
+    "for student in sorted_by_id:\n",
+    "    print(student)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0977aa77",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 馃敜 Insertion Sort by Name\n",
+    "\n",
+    "def insertion_sort_by_name(data):\n",
+    "    students = data.copy()\n",
+    "    for i in range(1, len(students)):\n",
+    "        key = students[i]\n",
+    "        j = i - 1\n",
+    "        while j >= 0 and students[j]['name'].lower() > key['name'].lower():\n",
+    "            students[j + 1] = students[j]\n",
+    "            j -= 1\n",
+    "        students[j + 1] = key\n",
+    "    return students\n",
+    "\n",
+    "sorted_by_name = insertion_sort_by_name(Students)\n",
+    "print(\"馃敺 Sorted by Name (Insertion Sort):\")\n",
+    "for student in sorted_by_name:\n",
+    "    print(student)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "2f82c204",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 馃搳 Selection Sort by CGPA (Descending)\n",
+    "\n",
+    "def selection_sort_by_cgpa(data):\n",
+    "    students = data.copy()\n",
+    "    n = len(students)\n",
+    "    for i in range(n):\n",
+    "        max_idx = i\n",
+    "        for j in range(i+1, n):\n",
+    "            if students[j]['cgpa'] > students[max_idx]['cgpa']:\n",
+    "                max_idx = j\n",
+    "        students[i], students[max_idx] = students[max_idx], students[i]\n",
+    "    return students\n",
+    "\n",
+    "sorted_by_cgpa = selection_sort_by_cgpa(Students)\n",
+    "print(\"馃敺 Sorted by CGPA (Selection Sort, Descending):\")\n",
+    "for student in sorted_by_cgpa:\n",
+    "    print(student)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f4b27577",
+   "metadata": {},
+   "source": [
+    "## 馃搱 Analysis and Discussion\n",
+    "\n",
+    "### 馃攳 Performance Comparison\n",
+    "\n",
+    "| Algorithm       | Time Complexity (Best) | Time Complexity (Worst) | Suitable For Small Data? |\n",
+    "|----------------|-------------------------|--------------------------|---------------------------|\n",
+    "| Bubble Sort     | O(n)                    | O(n虏)                   | 鉁� Yes                    |\n",
+    "| Insertion Sort  | O(n)                    | O(n虏)                   | 鉁� Yes                    |\n",
+    "| Selection Sort  | O(n虏)                   | O(n虏)                   | 鉁� Yes                    |\n",
+    "\n",
+    "### 馃煝 Bubble Sort\n",
+    "- **Pros**: Easy to implement and understand.\n",
+    "- **Cons**: Very inefficient for large datasets.\n",
+    "\n",
+    "### 馃煛 Insertion Sort\n",
+    "- **Pros**: Efficient for nearly sorted data; simple to implement.\n",
+    "- **Cons**: Slower than more advanced algorithms on large datasets.\n",
+    "\n",
+    "### 馃敶 Selection Sort\n",
+    "- **Pros**: Makes the minimum number of swaps.\n",
+    "- **Cons**: Not stable; always runs in O(n虏) time.\n",
+    "\n",
+    "### 馃挕 Conclusion\n",
+    "For small datasets like a list of 10 students, all three sorting algorithms perform well. However, for larger data, more efficient algorithms like Merge Sort or Quick Sort should be used. For sorting dictionaries, stable sorting (like insertion) is preferred when maintaining relative order is important.\n"
+   ]
+  }
+ ],
+ "metadata": {},
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
