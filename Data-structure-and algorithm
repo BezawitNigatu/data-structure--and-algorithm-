@@ -1,0 +1,118 @@
+import nbformat as nbf
+
+# Create new notebook
+nb = nbf.v4.new_notebook()
+
+# Header with student info
+header = nbf.v4.new_markdown_cell("""
+# Data Structure and Algorithms
+
+**Name:** Bezawit Negatu  
+**ID:** DBU1601999  
+**Department:** Data Science  
+**GitHub:** [https://github.com/BezawitNigatu](https://github.com/BezawitNigatu)
+""")
+
+# Student profiles
+students_data = nbf.v4.new_code_cell("""# Generate Student Profiles
+Students = [
+    {'id':'DBU1500001', 'name': 'Dawit', 'dept': 'DS', 'cgpa': 3.34},
+    {'id':'DBU1500002', 'name': 'Abrham', 'dept': 'CS', 'cgpa': 3.12},
+    {'id':'DBU1500003', 'name': 'Soliana', 'dept': 'DS', 'cgpa': 2.74},
+    {'id':'DBU1500004', 'name': 'Rahel', 'dept': 'CS', 'cgpa': 3.10},
+    {'id':'DBU1500005', 'name': 'Marta', 'dept': 'CS', 'cgpa': 3.65},
+    {'id':'DBU1500006', 'name': 'Kaleab', 'dept': 'DS', 'cgpa': 2.95},
+    {'id':'DBU1500007', 'name': 'Binyam', 'dept': 'CS', 'cgpa': 3.00},
+    {'id':'DBU1500008', 'name': 'Liya', 'dept': 'DS', 'cgpa': 3.78},
+    {'id':'DBU1500009', 'name': 'Hana', 'dept': 'CS', 'cgpa': 3.50},
+    {'id':'DBU1500010', 'name': 'Eyob', 'dept': 'DS', 'cgpa': 3.40}
+]
+Students""")
+
+# Bubble sort by ID
+bubble_sort_code = nbf.v4.new_code_cell("""# Bubble Sort by ID
+def bubble_sort_by_id(student_list):
+    n = len(student_list)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if student_list[j]['id'] > student_list[j+1]['id']:
+                student_list[j], student_list[j+1] = student_list[j+1], student_list[j]
+    return student_list
+
+# Test
+sorted_by_id = bubble_sort_by_id(Students.copy())
+print("Sorted by ID:")
+for s in sorted_by_id:
+    print(s)
+""")
+
+# Insertion sort by Name
+insertion_sort_code = nbf.v4.new_code_cell("""# Insertion Sort by Name
+def insertion_sort_by_name(student_list):
+    for i in range(1, len(student_list)):
+        key = student_list[i]
+        j = i - 1
+        while j >= 0 and key['name'].lower() < student_list[j]['name'].lower():
+            student_list[j + 1] = student_list[j]
+            j -= 1
+        student_list[j + 1] = key
+    return student_list
+
+# Test
+sorted_by_name = insertion_sort_by_name(Students.copy())
+print("\\nSorted by Name:")
+for s in sorted_by_name:
+    print(s)
+""")
+
+# Selection sort by CGPA
+selection_sort_code = nbf.v4.new_code_cell("""# Selection Sort by CGPA (Descending)
+def selection_sort_by_cgpa(student_list):
+    n = len(student_list)
+    for i in range(n):
+        max_idx = i
+        for j in range(i+1, n):
+            if student_list[j]['cgpa'] > student_list[max_idx]['cgpa']:
+                max_idx = j
+        student_list[i], student_list[max_idx] = student_list[max_idx], student_list[i]
+    return student_list
+
+# Test
+sorted_by_cgpa = selection_sort_by_cgpa(Students.copy())
+print("\\nSorted by CGPA (Descending):")
+for s in sorted_by_cgpa:
+    print(s)
+""")
+
+# Analysis
+analysis = nbf.v4.new_markdown_cell("""
+## Analysis
+
+**Bubble Sort**  
+- **Time Complexity:** O(n²)  
+- **Advantage:** Simple and easy to understand.  
+- **Disadvantage:** Very inefficient for large datasets.
+
+**Insertion Sort**  
+- **Time Complexity:** O(n²) worst case, O(n) best case.  
+- **Advantage:** Efficient for small or nearly sorted lists.  
+- **Disadvantage:** Still slow for large datasets.
+
+**Selection Sort**  
+- **Time Complexity:** O(n²)  
+- **Advantage:** Minimizes the number of swaps.  
+- **Disadvantage:** Still performs many comparisons, not efficient for large datasets.
+
+**Conclusion:**  
+These algorithms are suitable for learning purposes and small datasets. For real-world use, built-in sort methods like `sorted()` (Timsort) offer much better performance.
+""")
+
+# Combine all cells
+nb['cells'] = [header, students_data, bubble_sort_code, insertion_sort_code, selection_sort_code, analysis]
+
+# Save notebook
+file_path = "/mnt/data/Bezawit_Data_Structure_and_Algorithms.ipynb"
+with open(file_path, "w") as f:
+    nbf.write(nb, f)
+
+file_path
